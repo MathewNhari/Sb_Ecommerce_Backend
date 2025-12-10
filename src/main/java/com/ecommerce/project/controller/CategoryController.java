@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class CategoryController {
 
     private CategoryService categoryService;
@@ -19,24 +20,38 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("api/public/categories")
-    public List<Category> getAllCategories() {
-        return categoryService.getAllCategories();
+    @GetMapping("/public/categories")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = categoryService.getAllCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    @PostMapping("api/public/categories")
-    public String createCategory(@RequestBody Category category) {
-        categoryService.createCategory(category);
-        return "Category created successfully";
+    @PostMapping("/admin/categories")
+    public ResponseEntity<String> createCategory(@RequestBody Category category) {
+         categoryService.createCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Category added successfully");
     }
 
-    @DeleteMapping("api/admin/categories/{categoryId}")
+    @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         try {
-            return new ResponseEntity(categoryService.deleteCategory(categoryId), HttpStatus.OK);
+            return ResponseEntity.ok(categoryService.deleteCategory(categoryId));
         }
         catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(),e.getStatusCode());
         }
     }
+
+    @PutMapping("/admin/categories/{categoryId}")
+    public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
+        try{
+            Category updateCategory  = categoryService.updateCategory(category,categoryId);
+            return ResponseEntity.ok("Category with categoryId " +updateCategory.getCategoryId()+ " updated successfully");
+        }
+        catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(),e.getStatusCode());
+        }
+    }
+
+
 }
