@@ -69,3 +69,8 @@ Built with clean architecture, modular design, and best engineering practices to
 | Security     | Spring Security + JWT |
 | Build Tool   | Maven / Gradle        |
 | Documentation| Swagger / OpenAPI     |
+
+##Database Schema
+
+<img width="692" height="750" alt="image" src="https://github.com/user-attachments/assets/24598b04-45dd-4a51-8399-4745607f97a4" />
+
