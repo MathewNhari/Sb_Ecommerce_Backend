@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private ModelMapper modelMapper;
 
-
+    @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository, ModelMapper modelMapper) {
         this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
