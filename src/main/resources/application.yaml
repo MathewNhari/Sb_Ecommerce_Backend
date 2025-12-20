@@ -13,4 +13,6 @@ spring:
     properties:
       hibernate:
         format-sql: true
+project:
+  image: images/
 
