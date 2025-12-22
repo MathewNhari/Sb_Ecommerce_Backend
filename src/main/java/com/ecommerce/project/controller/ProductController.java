@@ -36,7 +36,7 @@ public class ProductController {
             @RequestParam(defaultValue = AppConstants.SORT_PRODUCT_BY) String sortBy,
             @RequestParam(defaultValue = AppConstants.SORT_DIR) String sortOrder
     ){
-        ProductResponse productResponse =  productService.getAllProducts();
+        ProductResponse productResponse =  productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class ProductController {
             @RequestParam(defaultValue = AppConstants.SORT_PRODUCT_BY) String sortBy,
             @RequestParam(defaultValue = AppConstants.SORT_DIR) String sortOrder
     ){
-        ProductResponse productResponse = productService.searchByCategory(categoryId);
+        ProductResponse productResponse = productService.searchByCategory(categoryId,pageNumber, pageSize, sortBy, sortOrder);
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
@@ -61,7 +61,7 @@ public class ProductController {
             @RequestParam(defaultValue = AppConstants.SORT_DIR) String sortOrder
     ){
 
-        ProductResponse productResponse = productService.searchProductByKeyword(keyword);
+        ProductResponse productResponse = productService.searchProductByKeyword(keyword, pageNumber, pageSize, sortBy, sortOrder);
         return new ResponseEntity<>(productResponse, HttpStatus.FOUND);
     }
 
